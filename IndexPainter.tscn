@@ -1,0 +1,290 @@
+[gd_scene load_steps=22 format=2]
+
+[ext_resource path="res://node/Drawer.tscn" type="PackedScene" id=1]
+[ext_resource path="res://icon/rectangle.png" type="Texture" id=2]
+[ext_resource path="res://icon/fill.png" type="Texture" id=3]
+[ext_resource path="res://icon/rounded.png" type="Texture" id=4]
+[ext_resource path="res://icon/anti_aliased.png" type="Texture" id=6]
+[ext_resource path="res://icon/line.png" type="Texture" id=7]
+[ext_resource path="res://IndexPainter.gd" type="Script" id=8]
+[ext_resource path="res://node/Canvas.tscn" type="PackedScene" id=9]
+[ext_resource path="res://node/max_spinbox.gd" type="Script" id=10]
+[ext_resource path="res://icon/delete.png" type="Texture" id=12]
+[ext_resource path="res://icon/export2.png" type="Texture" id=13]
+[ext_resource path="res://icon/grid.png" type="Texture" id=14]
+[ext_resource path="res://node/HScrollBox.tscn" type="PackedScene" id=16]
+[ext_resource path="res://icon/instruction.png" type="Texture" id=17]
+[ext_resource path="res://icon/snap.png" type="Texture" id=18]
+
+[sub_resource type="InputEventKey" id=1]
+pressed = true
+scancode = 50
+
+[sub_resource type="ShortCut" id=2]
+shortcut = SubResource( 1 )
+
+[sub_resource type="InputEventKey" id=3]
+pressed = true
+scancode = 51
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
+
+[sub_resource type="InputEventKey" id=5]
+pressed = true
+scancode = 52
+
+[sub_resource type="ShortCut" id=6]
+shortcut = SubResource( 5 )
+
+[node name="IndexPainter" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layers" type="Control" parent="VBoxContainer"]
+margin_right = 1024.0
+margin_bottom = 558.0
+size_flags_vertical = 3
+
+[node name="Canvas" parent="VBoxContainer/Layers" instance=ExtResource( 9 )]
+
+[node name="Canvas2" parent="VBoxContainer/Layers" instance=ExtResource( 9 )]
+visible = false
+
+[node name="Toolbar" parent="VBoxContainer" instance=ExtResource( 16 )]
+margin_top = 562.0
+margin_right = 1024.0
+margin_bottom = 600.0
+
+[node name="ScrollContainer" parent="VBoxContainer/Toolbar" index="0"]
+margin_right = 1017.0
+margin_bottom = 31.0
+
+[node name="HBoxContainer" parent="VBoxContainer/Toolbar/ScrollContainer" index="0"]
+margin_right = 593.0
+margin_bottom = 24.0
+
+[node name="Information" type="Button" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="0"]
+margin_right = 28.0
+margin_bottom = 24.0
+hint_tooltip = "information"
+icon = ExtResource( 17 )
+
+[node name="Export" type="Button" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="1"]
+margin_left = 32.0
+margin_right = 60.0
+margin_bottom = 24.0
+icon = ExtResource( 13 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorPickerButton" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="2"]
+margin_left = 64.0
+margin_right = 96.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 0 )
+hint_tooltip = "background"
+color = Color( 0.831373, 0.831373, 0.831373, 1 )
+edit_alpha = false
+
+[node name="VSeparator" type="VSeparator" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="3"]
+margin_left = 100.0
+margin_right = 104.0
+margin_bottom = 24.0
+
+[node name="Tool" type="HBoxContainer" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="4"]
+margin_left = 108.0
+margin_right = 535.0
+margin_bottom = 24.0
+
+[node name="Delete" type="Button" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_right = 28.0
+margin_bottom = 24.0
+hint_tooltip = "delete"
+icon = ExtResource( 12 )
+
+[node name="Index" type="SpinBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 32.0
+margin_right = 106.0
+margin_bottom = 24.0
+hint_tooltip = "index"
+max_value = 0.0
+suffix = "/ 0"
+script = ExtResource( 10 )
+maximum = 0
+
+[node name="Type" type="OptionButton" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 110.0
+margin_right = 181.0
+margin_bottom = 24.0
+hint_tooltip = "brush"
+mouse_filter = 1
+text = "line"
+icon = ExtResource( 7 )
+items = [ "line", ExtResource( 7 ), false, 0, null, "primitve", ExtResource( 2 ), false, 1, null, "eclipse", null, true, 2, null ]
+selected = 0
+
+[node name="Color" type="ColorPickerButton" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 185.0
+margin_right = 217.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 32, 0 )
+hint_tooltip = "color
+Tip: set this color to the background color to make it a eraser"
+
+[node name="Size" type="SpinBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 221.0
+margin_right = 295.0
+margin_bottom = 24.0
+hint_tooltip = "size"
+min_value = 1.0
+max_value = 16.0
+value = 4.0
+suffix = "px"
+
+[node name="Fill" type="CheckBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 299.0
+margin_right = 339.0
+margin_bottom = 24.0
+hint_tooltip = "fill"
+shortcut = SubResource( 2 )
+icon = ExtResource( 3 )
+
+[node name="Rounded" type="CheckBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 343.0
+margin_right = 383.0
+margin_bottom = 24.0
+hint_tooltip = "rounded"
+shortcut = SubResource( 4 )
+icon = ExtResource( 4 )
+
+[node name="Antialiased" type="CheckBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool"]
+margin_left = 387.0
+margin_right = 427.0
+margin_bottom = 24.0
+hint_tooltip = "anti-aliased"
+pressed = true
+shortcut = SubResource( 6 )
+icon = ExtResource( 6 )
+
+[node name="VSeparator2" type="VSeparator" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="5"]
+margin_left = 539.0
+margin_right = 543.0
+margin_bottom = 24.0
+
+[node name="Grid" type="HBoxContainer" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="6"]
+margin_left = 547.0
+margin_right = 585.0
+margin_bottom = 24.0
+
+[node name="Drawer" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid" instance=ExtResource( 1 )]
+margin_right = 38.0
+margin_bottom = 24.0
+hint_tooltip = "Grid"
+icon = ExtResource( 14 )
+
+[node name="X" type="SpinBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid"]
+visible = false
+margin_left = 32.0
+margin_right = 118.0
+margin_bottom = 24.0
+
+[node name="Y" type="SpinBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid"]
+visible = false
+margin_left = 32.0
+margin_right = 118.0
+margin_bottom = 24.0
+
+[node name="Snap" type="CheckBox" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid"]
+visible = false
+margin_left = 42.0
+margin_right = 82.0
+margin_bottom = 24.0
+icon = ExtResource( 18 )
+
+[node name="VSeparator3" type="VSeparator" parent="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer" index="7"]
+margin_left = 589.0
+margin_right = 593.0
+margin_bottom = 24.0
+
+[node name="SaveDialog" type="FileDialog" parent="."]
+margin_right = 768.0
+margin_bottom = 404.0
+input_pass_on_modal_close_click = false
+resizable = true
+access = 2
+filters = PoolStringArray( "*.png" )
+current_dir = "/Users/bouke/Desktop"
+current_path = "/Users/bouke/Desktop/"
+
+[node name="Information" type="PopupPanel" parent="."]
+margin_left = 25.0
+margin_top = 91.0
+margin_right = 766.0
+margin_bottom = 406.0
+input_pass_on_modal_close_click = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Information"]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 737.0
+margin_bottom = 311.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Information/ScrollContainer"]
+margin_right = 717.0
+margin_bottom = 286.0
+
+[node name="Label" type="Label" parent="Information/ScrollContainer/VBoxContainer"]
+margin_right = 725.0
+margin_bottom = 294.0
+text = "Hey! Good that you are reading this!
+
+This is a paint program where you paint by entering data in a Array. 
+Only you do this in a more natural way through the editor.
+In the computer world an Array is a data type. It acts a bit like a list of elements.
+In the editor you have acces to this Array through the index, which is a pointer to an element in the Array.
+Then you edit this element by setting the positions, type, color, fill, rounded, anti-aliased, through the interface.
+So in a way you are programming while painting :)
+
+All the buttons display tooltips if you hover over them, which shows the name. 
+Additionally you can define a grid. And you decide how big the painting is by resizing the window.
+
+What: IndexPainter
+Who: Me and testers!
+When: 16/05/2021
+Where: Netherlands
+How: Magic"
+
+[connection signal="painted" from="VBoxContainer/Layers/Canvas" to="." method="_on_Canvas_painted"]
+[connection signal="pressed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Information" to="." method="_on_Information_pressed"]
+[connection signal="pressed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Export" to="." method="_on_Export_pressed"]
+[connection signal="color_changed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Background" to="." method="_on_Background_color_changed"]
+[connection signal="pressed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Delete" to="." method="_on_Delete_pressed"]
+[connection signal="value_changed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Index" to="." method="_on_Index_value_changed"]
+[connection signal="item_selected" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Type" to="." method="_on_Type_item_selected"]
+[connection signal="color_changed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Color" to="." method="_on_Color_color_changed"]
+[connection signal="value_changed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Size" to="." method="_on_Size_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Fill" to="." method="_on_Fill_toggled"]
+[connection signal="toggled" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Rounded" to="." method="_on_Rounded_toggled"]
+[connection signal="toggled" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Tool/Antialiased" to="." method="_on_Antialiased_toggled"]
+[connection signal="value_changed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid/X" to="." method="_on_X_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid/Y" to="." method="_on_Y_value_changed"]
+[connection signal="toggled" from="VBoxContainer/Toolbar/ScrollContainer/HBoxContainer/Grid/Snap" to="." method="_on_Snap_toggled"]
+[connection signal="file_selected" from="SaveDialog" to="." method="_on_SaveDialog_file_selected"]
+
+[editable path="VBoxContainer/Toolbar"]

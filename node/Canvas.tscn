@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://node/tool.gd" type="Script" id=1]
+[ext_resource path="res://node/canvas.gd" type="Script" id=2]
+
+[node name="Canvas" type="ColorRect"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_default_cursor_shape = 3
+color = Color( 1, 1, 1, 0 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="Tool" type="Node2D" parent="."]
+script = ExtResource( 1 )
+
+[connection signal="gui_input" from="." to="." method="_on_Canvas_gui_input"]
